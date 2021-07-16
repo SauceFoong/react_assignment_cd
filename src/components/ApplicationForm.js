@@ -9,7 +9,6 @@ import {
   } from '@material-ui/core';
 import { FormFirstPageDetails } from './FormFirstPageDetails' ;
 import { FormSecondPageDetails } from './FormSecondPageDetails';
-import * as Yup from 'yup';
 import { Formik, Form } from 'formik' ; 
 import validationSchema from './FormModel/validationSchema';
 import formInitialStates from './FormModel/formInitialStates';
@@ -19,26 +18,20 @@ import applicationFormModel from './FormModel/applicationFormModel';
 const steps = ['FirstPageDetails' , 'SecondPageDetails'] ; 
 
 
-const {formId, formField} = applicationFormModel
+const {formId, formField} = applicationFormModel;
 
 
-const renderSwitch = (step,values,handleChange,handleBlur) => {
+const renderSwitch = (step,values,handleChange,handleBlur,errors) => {
     switch(step){
         case 0:
             return(
-                <FormFirstPageDetails formField= {formField} values={values} handleChange={handleChange} handleBlur={handleBlur}/>
-                    // nextStep={this.nextStep}
-                    // handleChange={this.handleChange}
-                    // values={values}
-                
+                <FormFirstPageDetails formField= {formField} values={values} handleChange={handleChange} handleBlur={handleBlur} errors={errors}/>
+
             )
         case 1:
             return(
-            <FormSecondPageDetails formField={formField} values={values} handleChange={handleChange} handleBlur={handleBlur}/>
-                // nextStep={this.nextStep}
-                // prevStep={this.prevStep}
-                // handleChange={this.handleChange}
-                // values={values}
+                <FormSecondPageDetails formField={formField} values={values} handleChange={handleChange} handleBlur={handleBlur} errors={errors}/>
+
             
             )
         case 2:
@@ -47,48 +40,16 @@ const renderSwitch = (step,values,handleChange,handleBlur) => {
             return <h1> Success </h1>
     }
 
-}
+};
+
 
 
 export class ApplicationForm extends Component {
     //Create the Form state 
     state = {
         activeStep: 0,
-        // fullName: '',
-        // birthDate: '' ,
-        // age: '',
-        // gender: '',
-        // email: '',
-        // phoneNumber: '',
-        // address: '' 
+
     }
-
-    // //Proceed to the Next Step
-    // nextStep = () => {
-    //     const {step} = this.state ; 
-    //     this.setState({
-    //         step: step+1
-    //     });
-    // }
-
-    // prevStep = () => {
-    //     const {step} = this.state;
-    //     this.setState({step:step-1});
-    // }
-
-    //Handle Fields Change
-    // handleChange = input => e => {
-    //     this.setState({[input]: e.target.value});
-    // }
-
-    //code refractoring 2 
-
-    // constructor(){
-    //     super();
-    //     this.state={
-    //         activeStep: 0 
-    //     };
-    // }
 
     setActiveStep = (step) => {
         this.setState({activeStep: step})
@@ -125,9 +86,6 @@ export class ApplicationForm extends Component {
     }
 
     render() {
-        // const { step } = this.state;
-        // const { fullName, birthDate, age, gender, email, phoneNumber, address }  = this.state ;  
-        // const values = { fullName, birthDate, age, gender, email, phoneNumber, address } ; 
         
         return (
         <React.Fragment>
@@ -148,13 +106,13 @@ export class ApplicationForm extends Component {
                 ):(
                     <Formik
                     initialValues = {formInitialStates}
-                    onSubmit= {this._handleSubmit}
                     validationSchema={this.currentValidationSchema}
+                    onSubmit= {this._handleSubmit}
                     >
                     
-                    {({isSubmitting,values, handleChange, handleBlur}) => (
+                    {({isSubmitting,values, handleChange, handleBlur, errors}) => (
                         <Form id = {formId}>
-                            {renderSwitch(this.state.activeStep,values,handleChange, handleBlur)}
+                            {renderSwitch(this.state.activeStep,values,handleChange, handleBlur, errors)}
 
                             <div className="button">
                             {this.state.activeStep !== 0 && (
@@ -181,6 +139,8 @@ export class ApplicationForm extends Component {
                                 
                                 
                             </div>
+
+                            <pre>{JSON.stringify(errors,null,2)}</pre>
 
                             </div>
                         </Form>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {Typography, TextField, Grid, MenuItem, Select, Button} from '@material-ui/core' ;
-import { Field, Form, Formik } from 'formik' ; 
 
 const gender = [
     {
@@ -18,21 +17,25 @@ const gender = [
 
 ]
 
+const dateNow = new Date(); // Creating a new date object with the current date and time
+const year = dateNow.getFullYear(); // Getting current year from the created Date object
+const monthWithOffset = dateNow.getUTCMonth() + 1; // January is 0 by default in JS. Offsetting +1 to fix date for calendar.
+const month = // Setting current Month number from current Date object
+  monthWithOffset.toString().length < 2 // Checking if month is < 10 and pre-prending 0 if not to adjust for date input.
+    ? `0${monthWithOffset}`
+    : monthWithOffset;
+const date =
+  dateNow.getUTCDate().toString().length < 2 // Checking if date is < 10 and pre-prending 0 if not to adjust for date input.
+    ? `0${dateNow.getUTCDate()}`
+    : dateNow.getUTCDate();
+
+const materialDateInput = `${year}-${month}-${date}`; // combining to format for defaultValue or value attribute of material <TextField>
+
 export class FormFirstPageDetails extends Component {
-    //const { formField:{fullName}} = props; 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         fullName : '',
-    //         birthDate: '',
-    //         age: '',
-    //         gender: ''
-           
-    //       }
-    //     }    
+
 
     render() {
-        const {formField: {fullName, birthDate, age, gender}, values, handleChange, handleBlur} = this.props ; 
+        const {formField: {fullName, birthDate, age, gender}, values, handleChange, handleBlur, errors} = this.props ; 
         //const { values, handleChange } = this.props ;  // pulling it out
         return (
             <React.Fragment>            
@@ -45,6 +48,7 @@ export class FormFirstPageDetails extends Component {
                         value={values.fullName}
                         onChange= {handleChange}
                         onBlur={handleBlur}
+                        error={errors.fullName}
                         label="Full Name"
                         variant="outlined"
                         fullWidth
@@ -56,6 +60,8 @@ export class FormFirstPageDetails extends Component {
                         value={values.birthDate}
                         onChange= {handleChange}
                         onBlur={handleBlur}
+                        error={errors.birthDate}
+                        defaultValue={materialDateInput}
                         label="Birth Date"
                         type="date"
                         fullWidth
@@ -68,17 +74,27 @@ export class FormFirstPageDetails extends Component {
                         value={values.age}
                         onChange= {handleChange}
                         onBlur={handleBlur}
+                        error={errors.age}
                         label="Age"
                         variant="outlined"
                         fullWidth
                     />
                     </Grid>
-                    {/* <Grid item xs={12} sm={12}>
-                    <Select id="gender" name={gender.name} label="Gender" fullWidth required>
+                    <Grid item xs={12} sm={12}>
+                    <Select 
+                    id="gender" 
+                    name={gender.name} 
+                    label="Gender" 
+                    value={values.gender} 
+                    onChange= {handleChange} 
+                    onBlur={handleBlur} 
+                    error={errors.gender} 
+                    fullWidth
+                    >
                         <MenuItem value="Male">Male</MenuItem>
                         <MenuItem value="Female">Female</MenuItem>
                     </Select>
-                    </Grid> */}
+                    </Grid>
                    
                 </Grid>                     
             </React.Fragment>

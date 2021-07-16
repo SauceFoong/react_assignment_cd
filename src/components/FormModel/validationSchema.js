@@ -15,16 +15,15 @@ const {
 
 export default [
     Yup.object().shape({
-        [fullName.name]: Yup.string().required('Full name required'),
-        [birthDate.name]: Yup.string().required('birthDate required'),
+        [fullName.name]: Yup.string().required('Full name required').max(10),
         [age.name]: Yup.string().required('age required'),
         [gender.name]: Yup.string().required('gender required')
       })
     ,
     Yup.object().shape({
-        [email.name]: Yup.string().required('Full name required'),
-        [phoneNumber.name]: Yup.string().required('birthDate required'),
-        [address.name]: Yup.string().required('age required')
+        [email.name]: Yup.string().required('Email required'),
+        [phoneNumber.name]: Yup.string().required('Phone Number required'),
+        [address.name]: Yup.string().required('Address required')
       })
 
 

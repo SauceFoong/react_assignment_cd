@@ -1,18 +1,9 @@
 import React, { Component } from 'react'
 import {Typography, TextField, Grid, MenuItem, Select, Button, Input} from '@material-ui/core' ;
-import { Field, Form, Formik } from 'formik' ; 
 
 
 
 export class FormSecondPageDetails extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         email : '',
-    //         phoneNumber: '',
-    //         address: ''           
-    //       }
-    //     }
 
     render() {
         //const { values, handleChange } = this.props ;  // pulling it out
