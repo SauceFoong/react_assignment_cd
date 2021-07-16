@@ -32,7 +32,7 @@ export class FormFirstPageDetails extends Component {
     //     }    
 
     render() {
-        const {formField: {fullName, birthDate, age, gender}} = this.props ; 
+        const {formField: {fullName, birthDate, age, gender}, values, handleChange, handleBlur} = this.props ; 
         //const { values, handleChange } = this.props ;  // pulling it out
         return (
             <React.Fragment>            
@@ -42,6 +42,9 @@ export class FormFirstPageDetails extends Component {
                     <Grid item xs={12} sm={12}>
                     <TextField
                         name= {fullName.name}
+                        value={values.fullName}
+                        onChange= {handleChange}
+                        onBlur={handleBlur}
                         label="Full Name"
                         variant="outlined"
                         fullWidth
@@ -50,6 +53,9 @@ export class FormFirstPageDetails extends Component {
                     <Grid item xs={12} sm={12}>
                      <TextField
                         name= {birthDate.name}
+                        value={values.birthDate}
+                        onChange= {handleChange}
+                        onBlur={handleBlur}
                         label="Birth Date"
                         type="date"
                         fullWidth
@@ -59,6 +65,9 @@ export class FormFirstPageDetails extends Component {
                     <Grid item xs={12} sm={12}>
                      <TextField
                         name= {age.name}
+                        value={values.age}
+                        onChange= {handleChange}
+                        onBlur={handleBlur}
                         label="Age"
                         variant="outlined"
                         fullWidth

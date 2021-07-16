@@ -16,7 +16,7 @@ export class FormSecondPageDetails extends Component {
 
     render() {
         //const { values, handleChange } = this.props ;  // pulling it out
-        const {formField : {email, phoneNumber, address}} = this.props ; 
+        const {formField : {email, phoneNumber, address}, values, handleChange, handleBlur} = this.props ; 
         return (
             <React.Fragment>            
                     <Typography variant="h6" gutterBottom>
@@ -26,6 +26,9 @@ export class FormSecondPageDetails extends Component {
                     <Grid item xs={12} sm={12}>
                     <TextField
                         name={email.name}
+                        value={values.email}
+                        onChange= {handleChange}
+                        onBlur={handleBlur}
                         label="Email"
                         variant="outlined"
                         fullWidth
@@ -34,6 +37,9 @@ export class FormSecondPageDetails extends Component {
                     <Grid item xs={12} sm={12}>
                      <TextField
                         name={phoneNumber.name}
+                        value={values.phoneNumber}
+                        onChange= {handleChange}
+                        onBlur={handleBlur}
                         label="Phone Number"
                         variant="outlined"
                         fullWidth
@@ -42,6 +48,9 @@ export class FormSecondPageDetails extends Component {
                     <Grid item xs={12} sm={12}>
                      <TextField
                         name={address.name}
+                        value={values.address}
+                        onChange= {handleChange}
+                        onBlur={handleBlur}
                         label="Address"
                         variant="outlined"
                         fullWidth

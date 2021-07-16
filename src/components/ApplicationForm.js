@@ -22,11 +22,11 @@ const steps = ['FirstPageDetails' , 'SecondPageDetails'] ;
 const {formId, formField} = applicationFormModel
 
 
-const renderSwitch = (step) => {
+const renderSwitch = (step,values,handleChange,handleBlur) => {
     switch(step){
         case 0:
             return(
-                <FormFirstPageDetails formField= {formField}/>
+                <FormFirstPageDetails formField= {formField} values={values} handleChange={handleChange} handleBlur={handleBlur}/>
                     // nextStep={this.nextStep}
                     // handleChange={this.handleChange}
                     // values={values}
@@ -34,7 +34,7 @@ const renderSwitch = (step) => {
             )
         case 1:
             return(
-            <FormSecondPageDetails formField={formField}/>
+            <FormSecondPageDetails formField={formField} values={values} handleChange={handleChange} handleBlur={handleBlur}/>
                 // nextStep={this.nextStep}
                 // prevStep={this.prevStep}
                 // handleChange={this.handleChange}
@@ -77,9 +77,9 @@ export class ApplicationForm extends Component {
     // }
 
     //Handle Fields Change
-    handleChange = input => e => {
-        this.setState({[input]: e.target.value});
-    }
+    // handleChange = input => e => {
+    //     this.setState({[input]: e.target.value});
+    // }
 
     //code refractoring 2 
 
@@ -115,6 +115,7 @@ export class ApplicationForm extends Component {
         } else {
             this.setActiveStep(this.state.activeStep + 1);
             actions.setTouched({});
+            console.log(values)
             actions.setSubmitting(false);
         }
     }
@@ -147,13 +148,13 @@ export class ApplicationForm extends Component {
                 ):(
                     <Formik
                     initialValues = {formInitialStates}
-                    validationSchema={this.currentValidationSchema}
                     onSubmit= {this._handleSubmit}
+                    validationSchema={this.currentValidationSchema}
                     >
                     
-                    {({isSubmitting}) => (
+                    {({isSubmitting,values, handleChange, handleBlur}) => (
                         <Form id = {formId}>
-                            {renderSwitch(this.state.activeStep)}
+                            {renderSwitch(this.state.activeStep,values,handleChange, handleBlur)}
 
                             <div className="button">
                             {this.state.activeStep !== 0 && (
@@ -184,7 +185,7 @@ export class ApplicationForm extends Component {
                             </div>
                         </Form>
                         )}
-                        </Formik>
+                    </Formik>
 
                     )}
         </React.Fragment>

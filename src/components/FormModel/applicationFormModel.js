@@ -2,7 +2,7 @@ export default {
     formId: 'applicationForm',
     formField: {
       fullName: {
-        name: 'firstName',
+        name: 'fullName',
         label: 'Full name',
         requiredErrorMsg: 'Full Name is required'
       },
