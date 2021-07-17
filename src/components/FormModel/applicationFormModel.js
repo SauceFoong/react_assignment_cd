@@ -3,7 +3,7 @@ export default {
     formField: {
       fullName: {
         name: 'fullName',
-        label: 'Full name',
+        label: 'Full Name',
         requiredErrorMsg: 'Full Name is required'
       },
       birthDate: {

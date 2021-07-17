@@ -57,7 +57,7 @@ export class ApplicationForm extends Component {
 
     //currentValidationSchema = validationSchema[activeStep] ; 
     isLastStep = this.state.activeStep === steps.length -1 ; 
-    currentValidationSchema = validationSchema[this.state.activeStep];
+    
     _sleep = (ms) => {
         return new Promise(resolve => setTimeout(resolve,ms)) ; 
     }
@@ -85,6 +85,10 @@ export class ApplicationForm extends Component {
         this.setActiveStep(this.state.activeStep - 1); 
     }
 
+    getCurrentScheme = () => {
+        return validationSchema[this.state.activeStep]
+    }
+
     render() {
         
         return (
@@ -105,8 +109,9 @@ export class ApplicationForm extends Component {
                     <h2>None</h2>
                 ):(
                     <Formik
+                    enableReinitialize
                     initialValues = {formInitialStates}
-                    validationSchema={this.currentValidationSchema}
+                    validationSchema={this.getCurrentScheme}
                     onSubmit= {this._handleSubmit}
                     >
                     
@@ -114,7 +119,7 @@ export class ApplicationForm extends Component {
                         <Form id = {formId}>
                             {renderSwitch(this.state.activeStep,values,handleChange, handleBlur, errors)}
 
-                            <div className="button">
+                            <div className="button" >
                             {this.state.activeStep !== 0 && (
                                 <Button onClick={this._handleBack} className="button">
                                 Back
@@ -141,6 +146,7 @@ export class ApplicationForm extends Component {
                             </div>
 
                             <pre>{JSON.stringify(errors,null,2)}</pre>
+
 
                             </div>
                         </Form>

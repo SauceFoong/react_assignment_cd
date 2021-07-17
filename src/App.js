@@ -1,14 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
 import { ApplicationForm } from './components/ApplicationForm' ;
-import { Button } from '@material-ui/core' ; 
 
 function App() {
   return (
     <div className="App">
-      <ApplicationForm />
+        <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10 justify-center">
+        <ApplicationForm />
+        </div>
     </div>
   );
 }
 
 export default App;
+

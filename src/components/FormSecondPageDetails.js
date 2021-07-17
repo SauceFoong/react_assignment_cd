@@ -7,7 +7,7 @@ export class FormSecondPageDetails extends Component {
 
     render() {
         //const { values, handleChange } = this.props ;  // pulling it out
-        const {formField : {email, phoneNumber, address}, values, handleChange, handleBlur} = this.props ; 
+        const {formField : {email, phoneNumber, address}, values, handleChange, handleBlur, errors} = this.props ; 
         return (
             <React.Fragment>            
                     <Typography variant="h6" gutterBottom>
@@ -20,7 +20,9 @@ export class FormSecondPageDetails extends Component {
                         value={values.email}
                         onChange= {handleChange}
                         onBlur={handleBlur}
-                        label="Email"
+                        error={errors.email}
+                        helperText= {errors.email}
+                        label={email.label}
                         variant="outlined"
                         fullWidth
                     />
@@ -31,7 +33,9 @@ export class FormSecondPageDetails extends Component {
                         value={values.phoneNumber}
                         onChange= {handleChange}
                         onBlur={handleBlur}
-                        label="Phone Number"
+                        error={errors.phoneNumber}
+                        helperText= {errors.phoneNumber}
+                        label={phoneNumber.label}
                         variant="outlined"
                         fullWidth
                     />
@@ -42,7 +46,9 @@ export class FormSecondPageDetails extends Component {
                         value={values.address}
                         onChange= {handleChange}
                         onBlur={handleBlur}
-                        label="Address"
+                        error={errors.address}
+                        helperText= {errors.address}
+                        label={address.label}
                         variant="outlined"
                         fullWidth
                     />

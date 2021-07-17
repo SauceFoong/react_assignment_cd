@@ -1,22 +1,8 @@
 import React, { Component } from 'react'
 import {Typography, TextField, Grid, MenuItem, Select, Button} from '@material-ui/core' ;
+import axios from 'axios';
 
-const gender = [
-    {
-        value : undefined,
-        label : 'None'
-    },
-    {
-        value: 'm',
-        label: 'Male'
-    },
-    {
-        value: 'f',
-        label: 'Female'
-    }
-
-]
-
+// imported code for checking today's date 
 const dateNow = new Date(); // Creating a new date object with the current date and time
 const year = dateNow.getFullYear(); // Getting current year from the created Date object
 const monthWithOffset = dateNow.getUTCMonth() + 1; // January is 0 by default in JS. Offsetting +1 to fix date for calendar.
@@ -32,10 +18,30 @@ const date =
 const materialDateInput = `${year}-${month}-${date}`; // combining to format for defaultValue or value attribute of material <TextField>
 
 export class FormFirstPageDetails extends Component {
+    state = {
+        gender_options: []
+    } 
+    //https://run.mocky.io/v3/057c4586-d259-44b5-82f0-bca84cffba6d
+    //https://run.mocky.io/v3/aca70c11-5d06-4770-b13c-5792b9700502
+    //https://run.mocky.io/v3/a0df5a2f-6dc8-4956-b2a3-0db01e0c937c
+    componentDidMount() {
+        const url = "https://run.mocky.io/v3/27d25773-aff0-405e-a453-84b667871db1"
+        axios.get(url).then((response) => 
+            {   
+                console.log((response))
+                this.setState({gender_options:response.data.gender})
+                console.log(this.state.gender_options)
+            })
+
+            //.catch(err => console.log("Error detected ! "))
+    }
+    
 
 
     render() {
         const {formField: {fullName, birthDate, age, gender}, values, handleChange, handleBlur, errors} = this.props ; 
+        //const {gender_options} = this.state ; 
+        //console.log(this.state.gender_options);
         //const { values, handleChange } = this.props ;  // pulling it out
         return (
             <React.Fragment>            
@@ -49,7 +55,8 @@ export class FormFirstPageDetails extends Component {
                         onChange= {handleChange}
                         onBlur={handleBlur}
                         error={errors.fullName}
-                        label="Full Name"
+                        helperText= {errors.fullName}
+                        label={fullName.label}
                         variant="outlined"
                         fullWidth
                     />
@@ -61,8 +68,9 @@ export class FormFirstPageDetails extends Component {
                         onChange= {handleChange}
                         onBlur={handleBlur}
                         error={errors.birthDate}
+                        helperText= {errors.birthDate}
                         defaultValue={materialDateInput}
-                        label="Birth Date"
+                        label={birthDate.label}
                         type="date"
                         fullWidth
 
@@ -75,7 +83,8 @@ export class FormFirstPageDetails extends Component {
                         onChange= {handleChange}
                         onBlur={handleBlur}
                         error={errors.age}
-                        label="Age"
+                        helperText= {errors.age}
+                        label={age.label}
                         variant="outlined"
                         fullWidth
                     />
@@ -84,15 +93,21 @@ export class FormFirstPageDetails extends Component {
                     <Select 
                     id="gender" 
                     name={gender.name} 
-                    label="Gender" 
+                    label={gender.label} 
                     value={values.gender} 
                     onChange= {handleChange} 
                     onBlur={handleBlur} 
                     error={errors.gender} 
                     fullWidth
                     >
-                        <MenuItem value="Male">Male</MenuItem>
-                        <MenuItem value="Female">Female</MenuItem>
+
+                         {this.state.gender_options.map((item) => {
+                            return (
+                                <MenuItem value={item}>{item}</MenuItem>
+                            );
+                        })}
+
+                        
                     </Select>
                     </Grid>
                    
@@ -103,3 +118,6 @@ export class FormFirstPageDetails extends Component {
 }
 
 export default FormFirstPageDetails
+ {/* {
+                        gender_options.map((gender_option) => <MenuItem value={gender_option}>{gender_option}</MenuItem>
+                        )} */}
