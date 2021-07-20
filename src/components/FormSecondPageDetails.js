@@ -7,21 +7,18 @@ export class FormSecondPageDetails extends Component {
 
     render() {
         //const { values, handleChange } = this.props ;  // pulling it out
-        const {formField : {email, phoneNumber, address}, values, handleChange, handleBlur, errors} = this.props ; 
+        const {formField : {email, phoneNumber, address}, values, handleChange, handleBlur, errors, touched} = this.props ; 
         return (
             <React.Fragment>            
-                    <Typography variant="h6" gutterBottom>
-                    Second Page
-                    </Typography>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={12}>
                     <TextField
                         name={email.name}
-                        value={values.email}
+                        value={values.email? values.email:""}
                         onChange= {handleChange}
                         onBlur={handleBlur}
-                        error={errors.email}
-                        helperText= {errors.email}
+                        error={Boolean((touched.email || touched.formField) && errors.email)}
+                        helperText= {(touched.email || touched.formField) && errors.email}
                         label={email.label}
                         variant="outlined"
                         fullWidth
@@ -30,11 +27,11 @@ export class FormSecondPageDetails extends Component {
                     <Grid item xs={12} sm={12}>
                      <TextField
                         name={phoneNumber.name}
-                        value={values.phoneNumber}
+                        value={values.phoneNumber? values.phoneNumber:""}
                         onChange= {handleChange}
                         onBlur={handleBlur}
-                        error={errors.phoneNumber}
-                        helperText= {errors.phoneNumber}
+                        error={Boolean((touched.phoneNumber || touched.formField) && errors.phoneNumber)}
+                        helperText= {(touched.phoneNumber || touched.formField) && errors.phoneNumber}
                         label={phoneNumber.label}
                         variant="outlined"
                         fullWidth
@@ -43,10 +40,10 @@ export class FormSecondPageDetails extends Component {
                     <Grid item xs={12} sm={12}>
                      <TextField
                         name={address.name}
-                        value={values.address}
+                        value={values.address? values.address:""}
                         onChange= {handleChange}
                         onBlur={handleBlur}
-                        error={errors.address}
+                        error={Boolean((touched.address || touched.formField) && errors.address)}
                         helperText= {errors.address}
                         label={address.label}
                         variant="outlined"

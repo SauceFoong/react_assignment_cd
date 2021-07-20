@@ -15,7 +15,8 @@ const {
 
 export default [
     Yup.object().shape({
-        [fullName.name]: Yup.string().required('Full Name is required').max(10),
+        [fullName.name]: Yup.string().required('Full Name is required').max(10,"Full Name must be at most 10 characters"),
+        [birthDate.name]: Yup.string().required('Birth Date is required'),
         [age.name]: Yup.string().required('Age is required').max(3),
         [gender.name]: Yup.string().required('Gender is required')
       })
@@ -30,10 +31,3 @@ export default [
 ];
 
 
-// Yup.object().shape({
-//     fullName: Yup.string().max(50).required('Full name is required'),
-//     email: Yup.string().email('It must be a valid email').max(50).required('Email is required'),
-//     phoneNumber: Yup.string().min(6,'Phone number must be at least 6 numbers').max(20,'Phone number must be at most 20 numbers').required('Phone number is required'),
-
-    
-// })

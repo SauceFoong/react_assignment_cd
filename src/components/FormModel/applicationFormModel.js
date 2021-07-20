@@ -18,7 +18,7 @@ export default {
       },
       gender: {
         name: 'gender',
-        label: 'Address Line'
+        label: 'Gender'
       },
       email: {
         name: 'email',
