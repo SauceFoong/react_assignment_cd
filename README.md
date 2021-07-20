@@ -1,1 +1,1 @@
-A Multiple Page Form implement written in React.js using Material UI, Formik, Tailwind CSS.
+A Multiple Page Form written in React.js using Material UI, Formik, Tailwind CSS.
