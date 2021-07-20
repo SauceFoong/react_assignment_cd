@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import moment from 'moment';
 import applicationFormModel from './applicationFormModel';
 
 const {
@@ -15,9 +16,13 @@ const {
 
 export default [
     Yup.object().shape({
-        [fullName.name]: Yup.string().required('Full Name is required').max(10,"Full Name must be at most 10 characters"),
-        [birthDate.name]: Yup.string().required('Birth Date is required'),
-        [age.name]: Yup.string().required('Age is required').max(3),
+        [fullName.name]: Yup.string().required('Full Name is required').max(20,"Full Name must be at most 10 characters"),
+        [birthDate.name]: Yup.string().required('Birth Date is required').test('birthDate',"Birth Date Not qualified" , value => {
+            return moment().diff(moment(value),'years') >= 12;
+          }),
+        [age.name]: Yup.string().required('Age is required').max(3).test('age', 'Age must greater than 12' , value => {
+            return Number(value)>=12;
+        }),
         [gender.name]: Yup.string().required('Gender is required')
       })
     ,

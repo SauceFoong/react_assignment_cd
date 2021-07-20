@@ -4,8 +4,8 @@ import { ApplicationForm } from './components/ApplicationForm' ;
 
 function App() {
   return (
-    <div className="App">
-        <div className="bg-white py-8 px-6 shadow rounded-lg m-10">
+    <div className="xl:px-40 xl:py-20 App">
+        <div className="bg-white w-30 py-8 px-6 shadow-2xl rounded-lg m-10">
         <ApplicationForm />
         </div>
     </div>

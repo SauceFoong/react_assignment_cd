@@ -25,13 +25,10 @@ const renderSwitch = (step,values,handleChange,handleBlur,errors,touched) => {
         case 0:
             return(
                 <FormFirstPageDetails formField= {formField} values={values} handleChange={handleChange} handleBlur={handleBlur} errors={errors} touched={touched} />
-
             )
         case 1:
             return(
                 <FormSecondPageDetails formField={formField} values={values} handleChange={handleChange} handleBlur={handleBlur} errors={errors} touched={touched} />
-
-            
             )
     }
 
@@ -40,7 +37,6 @@ const renderSwitch = (step,values,handleChange,handleBlur,errors,touched) => {
 
 
 export class ApplicationForm extends Component {
-    //Create the Form state 
     state = {
         activeStep: 0,
 
@@ -48,10 +44,6 @@ export class ApplicationForm extends Component {
 
     setActiveStep = (step) => {
         this.setState({activeStep: step})
-    }
-
-    setFormField = (allField) => {
-        this.setState({formField:allField})
     }
 
     isLastStep = () => {
@@ -96,7 +88,7 @@ export class ApplicationForm extends Component {
         const {activeStep} = this.state ;
         return (
         <React.Fragment>
-            <Typography component="h1" variant="h4" align = "center">
+            <Typography variant="h4" align = "center" className="text-blue-500 font-bold center">
                 Application Form
             </Typography>
             <Stepper alternativeLabel activeStep={activeStep} className="stepper">
@@ -113,7 +105,10 @@ export class ApplicationForm extends Component {
         <React.Fragment>
                 {activeStep === steps.length ?(
                     //Submitted Successfully
-                    <h2>Congrats, your form has been submitted successfully !</h2>
+                    <div className="px-8 py -8 wrapper-submit">
+                    <h2 className="text-5xl">Thank you ! </h2>
+                    <p className="p-6 text-xl">Your form was submitted successfully.</p>
+                    </div>
                 ):(
                     <Formik
                     enableReinitialize = {true}
@@ -166,13 +161,13 @@ export class ApplicationForm extends Component {
                                 
                             </div>
 
-
-                            <div className="inline-block Clear All">
+                            
+                            <div className={this.isLastStep() ? "m-3 lg:inline-block clear-all-di" : "inline-block clear-all-div"}>
                                  
                                  <Button
                                  variant="contained"
                                  color="secondary"
-                                 className="clear-all"
+                                 className="md:m-6 clear-all"
                                  type="reset"
                                  onClick={() => {                        
                                     if(activeStep > 0){

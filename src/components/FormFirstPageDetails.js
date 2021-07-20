@@ -8,9 +8,6 @@ export class FormFirstPageDetails extends Component {
         gender_options: []
     } 
 
-    //https://run.mocky.io/v3/057c4586-d259-44b5-82f0-bca84cffba6d
-    //https://run.mocky.io/v3/aca70c11-5d06-4770-b13c-5792b9700502
-    //https://run.mocky.io/v3/a0df5a2f-6dc8-4956-b2a3-0db01e0c937c
     componentDidMount() {
         const url = "https://run.mocky.io/v3/27d25773-aff0-405e-a453-84b667871db1"
         axios.get(url).then((response) => 
@@ -23,9 +20,7 @@ export class FormFirstPageDetails extends Component {
 
     render() {
         const {formField: {fullName, birthDate, age, gender}, values, handleChange, handleBlur, errors, touched, isSubmitting} = this.props ; 
-        //const {gender_options} = this.state ; 
-        //console.log(this.state.gender_options);
-        //const { values, handleChange } = this.props ;  // pulling it out
+
         return (
             <React.Fragment>            
                 <Grid container spacing={3}>
@@ -58,7 +53,7 @@ export class FormFirstPageDetails extends Component {
 
                     />
                     </Grid>
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={6} sm={6}>
                      <TextField
                         name= {age.name}
                         value={values.age? values.age: ""}
@@ -71,7 +66,7 @@ export class FormFirstPageDetails extends Component {
                         fullWidth
                     />
                     </Grid>
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={6} sm={6}>
                     <TextField 
                     id="gender" 
                     select
@@ -102,6 +97,3 @@ export class FormFirstPageDetails extends Component {
 }
 
 export default FormFirstPageDetails
- {/* {
-                        gender_options.map((gender_option) => <MenuItem value={gender_option}>{gender_option}</MenuItem>
-                        )} */}

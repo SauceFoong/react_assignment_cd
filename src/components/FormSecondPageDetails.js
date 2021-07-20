@@ -6,7 +6,6 @@ import {Typography, TextField, Grid, MenuItem, Select, Button, Input} from '@mat
 export class FormSecondPageDetails extends Component {
 
     render() {
-        //const { values, handleChange } = this.props ;  // pulling it out
         const {formField : {email, phoneNumber, address}, values, handleChange, handleBlur, errors, touched} = this.props ; 
         return (
             <React.Fragment>            
